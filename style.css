@@ -1,0 +1,55 @@
+import OpenAI from 'openai';
+import { Resend } from 'resend';
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const systemPrompt = `You are Core, the AI Website Consultant for Core Site Agency LLC.
+Business phone: 470-371-1587.
+Email for leads: coresitellc@gmail.com.
+Services and prices:
+- Starter Website: $1,000. Good for basic online presence.
+- Business Website: $1,750. Good for service businesses that need lead capture.
+- E-Commerce Website: $2,500. Good for selling products/services online.
+- AI Employee Add-On: +$1,000. Answers customer questions, recommends services, captures leads, works 24/7.
+- Website Maintenance: $100/month. Updates, bug fixes, small content changes, support.
+Payment: 50% upfront and 50% after completion.
+
+Your job:
+1. Answer questions clearly.
+2. Recommend the best package.
+3. Qualify leads by collecting: Business name, Owner name, Phone, Email, Budget, Business type, whether they want AI, and recommended package.
+4. When you have enough info, tell the visitor their info will be sent to Core Site Agency.
+5. You must include a final line exactly like this when the lead is complete:
+LEAD_READY: {"business":"...","owner":"...","phone":"...","email":"...","recommendedPackage":"...","ai":"YES or NO","budget":"..."}
+Keep responses short and sales-focused.`;
+
+export async function POST(req) {
+  try {
+    const { messages } = await req.json();
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [{ role: 'system', content: systemPrompt }, ...messages],
+      temperature: 0.4
+    });
+
+    let reply = completion.choices[0]?.message?.content || 'Please call 470-371-1587 for help.';
+    const match = reply.match(/LEAD_READY:\s*(\{[\s\S]*\})/);
+
+    if (match) {
+      const lead = JSON.parse(match[1]);
+      await resend.emails.send({
+        from: 'Core Site Leads <onboarding@resend.dev>',
+        to: process.env.LEAD_EMAIL_TO || 'coresitellc@gmail.com',
+        subject: `NEW LEAD - ${lead.business || 'Core Site Website'}`,
+        text: `NEW LEAD\n\nBusiness:\n${lead.business}\n\nOwner:\n${lead.owner}\n\nPhone:\n${lead.phone}\n\nEmail:\n${lead.email}\n\nRecommended Package:\n${lead.recommendedPackage}\n\nAI:\n${lead.ai}\n\nBudget:\n${lead.budget}`
+      });
+      reply = reply.replace(/LEAD_READY:\s*\{[\s\S]*\}/, '').trim() + '\n\nPerfect — I sent your information to Core Site Agency LLC. The team can also be reached at 470-371-1587.';
+    }
+
+    return Response.json({ reply });
+  } catch (error) {
+    console.error(error);
+    return Response.json({ reply: 'Sorry, I had trouble processing that. Please call Core Site Agency LLC at 470-371-1587.' }, { status: 200 });
+  }
+}
