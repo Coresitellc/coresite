@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Core Site Agency LLC | AI-Powered Websites for Small Businesses</title>
+  <meta name="description" content="Core Site Agency LLC builds modern websites, e-commerce stores, AI customer service systems, and 24/7 maintenance for small businesses." />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #070a12;
+      color: #fff;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .page-bg {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(34, 211, 238, .26), transparent 28%),
+        radial-gradient(circle at 80% 15%, rgba(99, 102, 241, .28), transparent 28%),
+        linear-gradient(180deg, #070a12, #0b1020 45%, #070a12);
+      overflow: hidden;
+    }
+    .container { width: min(1120px, 92%); margin: 0 auto; }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 26px 0;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo {
+      width: 44px; height: 44px;
+      display: grid; place-items: center;
+      border-radius: 16px;
+      background: #fff;
+      color: #070a12;
+      font-weight: 900;
+    }
+    .brand h3 { font-size: 1rem; line-height: 1.1; }
+    .brand p { font-size: .75rem; color: rgba(255,255,255,.55); }
+    .nav-links { display: flex; gap: 28px; color: rgba(255,255,255,.72); font-size: .92rem; }
+    .nav-links a:hover { color: white; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-weight: 800;
+      border: 1px solid rgba(255,255,255,.14);
+      transition: .2s ease;
+      cursor: pointer;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: #67e8f9; color: #06111a; border: none; }
+    .btn-white { background: white; color: #070a12; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 56px;
+      align-items: center;
+      padding: 72px 0 86px;
+    }
+    .pill {
+      display: inline-flex;
+      gap: 9px;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.08);
+      padding: 10px 15px;
+      border-radius: 999px;
+      color: rgba(255,255,255,.82);
+      font-size: .9rem;
+      margin-bottom: 22px;
+      backdrop-filter: blur(12px);
+    }
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.9rem);
+      line-height: .94;
+      letter-spacing: -4px;
+      max-width: 850px;
+    }
+    .cyan { color: #67e8f9; }
+    .hero p {
+      margin-top: 24px;
+      color: rgba(255,255,255,.68);
+      font-size: 1.15rem;
+      max-width: 650px;
+    }
+    .hero-actions { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+    .mockup {
+      position: relative;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.08);
+      border-radius: 34px;
+      padding: 14px;
+      box-shadow: 0 30px 100px rgba(0,0,0,.35);
+      backdrop-filter: blur(14px);
+    }
+    .mockup::before {
+      content: "";
+      position: absolute;
+      inset: -25px;
+      background: rgba(103,232,249,.12);
+      filter: blur(50px);
+      z-index: -1;
+    }
+    .mockup img {
+      width: 100%; height: 460px;
+      object-fit: cover;
+      border-radius: 26px;
+      display: block;
+    }
+    .ai-card {
+      position: absolute;
+      left: 34px; right: 34px; bottom: 34px;
+      background: rgba(7,10,18,.84);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 24px;
+      padding: 20px;
+      backdrop-filter: blur(16px);
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+    }
+    .icon {
+      width: 48px; height: 48px;
+      display: grid; place-items: center;
+      border-radius: 16px;
+      background: #67e8f9;
+      color: #06111a;
+      flex-shrink: 0;
+      font-weight: 900;
+    }
+    section { padding: 72px 0; }
+    .section-head { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 32px; }
+    .eyebrow { color: #67e8f9; text-transform: uppercase; letter-spacing: .18em; font-weight: 900; font-size: .78rem; }
+    h2 { font-size: clamp(2.2rem, 4vw, 4rem); line-height: 1; letter-spacing: -2px; margin-top: 12px; }
+    .section-head p, .muted { color: rgba(255,255,255,.62); max-width: 560px; }
+    .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .work-card, .plan-card, .feature-card {
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.055);
+      border-radius: 30px;
+      overflow: hidden;
+    }
+    .work-card img { width: 100%; height: 250px; object-fit: cover; display: block; }
+    .work-card div { padding: 22px; }
+    .work-card p { color: rgba(255,255,255,.56); margin-top: 6px; }
+    .ai-section {
+      border: 1px solid rgba(103,232,249,.22);
+      background: rgba(103,232,249,.10);
+      border-radius: 40px;
+      padding: 46px;
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 34px;
+      align-items: center;
+    }
+    .ai-list { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .ai-list div {
+      background: rgba(255,255,255,.09);
+      border-radius: 18px;
+      padding: 16px;
+      color: rgba(255,255,255,.82);
+    }
+    .plans-head { text-align: center; max-width: 760px; margin: 0 auto 38px; }
+    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .plan-card { padding: 30px; position: relative; overflow: visible; }
+    .plan-card.popular { border-color: rgba(103,232,249,.85); background: rgba(255,255,255,.105); box-shadow: 0 20px 70px rgba(34,211,238,.12); }
+    .badge {
+      position: absolute; top: -15px; left: 28px;
+      background: #67e8f9; color: #06111a;
+      border-radius: 999px; padding: 8px 14px;
+      font-size: .72rem; font-weight: 900; letter-spacing: .12em;
+    }
+    .price { font-size: 3.2rem; font-weight: 950; margin: 18px 0; letter-spacing: -2px; }
+    .plan-card ul { list-style: none; display: grid; gap: 13px; margin-top: 22px; color: rgba(255,255,255,.76); }
+    .plan-card li::before { content: "✓"; color: #67e8f9; font-weight: 900; margin-right: 10px; }
+    .addon {
+      margin-top: 24px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(7,10,18,.48);
+      border: 1px solid rgba(255,255,255,.1);
+      color: rgba(255,255,255,.72);
+      font-size: .95rem;
+    }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .feature-card { padding: 28px; }
+    .feature-card h3 { margin: 18px 0 8px; font-size: 1.25rem; }
+    .feature-card p { color: rgba(255,255,255,.58); }
+    .contact-box {
+      background: white;
+      color: #070a12;
+      border-radius: 42px;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr .75fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .contact-card {
+      background: #070a12;
+      color: white;
+      border-radius: 30px;
+      padding: 28px;
+    }
+    .contact-card a { font-size: 1.9rem; font-weight: 950; display: block; margin: 10px 0 22px; }
+    footer { padding: 30px 0; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.45); font-size: .9rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+
+    .quote-ai-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .assistant-demo, .quote-form {
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.06);
+      border-radius: 34px;
+      padding: 28px;
+      backdrop-filter: blur(14px);
+    }
+    .chat-window {
+      margin-top: 22px;
+      display: grid;
+      gap: 14px;
+    }
+    .chat-bubble {
+      padding: 15px 17px;
+      border-radius: 20px;
+      max-width: 92%;
+      font-size: .95rem;
+    }
+    .chat-bubble.ai {
+      background: rgba(103,232,249,.16);
+      border: 1px solid rgba(103,232,249,.22);
+      color: rgba(255,255,255,.9);
+    }
+    .chat-bubble.customer {
+      justify-self: end;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.1);
+      color: rgba(255,255,255,.78);
+    }
+    .lead-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .lead-tags span {
+      border: 1px solid rgba(103,232,249,.25);
+      background: rgba(103,232,249,.1);
+      color: rgba(255,255,255,.82);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+    form { display: grid; gap: 14px; margin-top: 22px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label { font-size: .83rem; color: rgba(255,255,255,.68); font-weight: 800; }
+    input, select, textarea {
+      width: 100%;
+      margin-top: 7px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(7,10,18,.7);
+      color: white;
+      border-radius: 16px;
+      padding: 14px 15px;
+      font: inherit;
+      outline: none;
+    }
+    textarea { min-height: 116px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { border-color: rgba(103,232,249,.75); }
+    .form-note { color: rgba(255,255,255,.52); font-size: .9rem; margin-top: 10px; }
+    .floating-assistant {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 50;
+      width: min(355px, calc(100% - 44px));
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(7,10,18,.92);
+      border-radius: 26px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.45);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+    .assistant-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px;
+      background: rgba(103,232,249,.13);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .assistant-header strong { display:block; line-height:1.1; }
+    .assistant-header span { color: rgba(255,255,255,.58); font-size: .8rem; }
+    .assistant-body { padding: 16px; display: grid; gap: 10px; }
+    .assistant-body p { color: rgba(255,255,255,.72); font-size: .92rem; }
+    .assistant-options { display: grid; gap: 8px; }
+    .assistant-options a {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.07);
+      border-radius: 14px;
+      padding: 10px 12px;
+      color: rgba(255,255,255,.82);
+      font-weight: 800;
+      font-size: .88rem;
+    }
+    @media (max-width: 920px) {
+      .nav-links, .nav-cta { display: none; }
+      .hero, .ai-section, .contact-box, .quote-ai-grid, .form-row { grid-template-columns: 1fr; }
+      .work-grid, .plans, .features { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .ai-list { grid-template-columns: 1fr; }
+      .mockup img { height: 380px; }
+      h1 { letter-spacing: -2px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="container">
+      <nav>
+        <a class="brand" href="#top" aria-label="Core Site Agency LLC home">
+          <div class="logo">CS</div>
+          <div>
+            <h3>Core Site Agency LLC</h3>
+            <p>CoreSiteLLC.com</p>
+          </div>
+        </a>
+        <div class="nav-links">
+          <a href="#work">Work</a>
+          <a href="#plans">Plans</a>
+          <a href="#ai">AI Add-On</a>
+          <a href="#quote">Quote</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a class="btn btn-white nav-cta" href="tel:4703711587">Call 470-371-1587</a>
+      </nav>
+
+      <header class="hero" id="top">
+        <div>
+          <div class="pill">✦ Modern websites for small businesses</div>
+          <h1>Websites that work while you <span class="cyan">sleep.</span></h1>
+          <p>Core Site Agency LLC builds sleek websites, online stores, and AI-powered customer service systems that help small businesses answer questions, capture leads, and convert visitors 24/7.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#quote">Get a Free Quote →</a>
+            <a class="btn" href="tel:4703711587">Call 470-371-1587</a>
+          </div>
+        </div>
+
+        <div class="mockup">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1300&q=80" alt="Modern website dashboard preview">
+          <div class="ai-card">
+            <div class="icon">AI</div>
+            <div>
+              <h3>Your 24/7 AI Employee</h3>
+              <p class="muted">Answers customer questions, recommends services, and captures leads even when your business is closed.</p>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <section id="work">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Website examples</p>
+            <h2>Built for everyday businesses.</h2>
+          </div>
+          <p>Simple, clean, premium-looking websites for restaurants, barbers, salons, contractors, gyms, stores, and local service businesses.</p>
+        </div>
+        <div class="work-grid">
+          <div class="work-card">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1000&q=80" alt="Restaurant website example">
+            <div><h3>Restaurants</h3><p>Menus, reservations, hours, location, and customer contact forms.</p></div>
+          </div>
+          <div class="work-card">
+            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1000&q=80" alt="Barber and beauty website example">
+            <div><h3>Barbers & Beauty</h3><p>Service pages, booking links, galleries, and mobile-friendly layouts.</p></div>
+          </div>
+          <div class="work-card">
+            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=80" alt="Local service business website example">
+            <div><h3>Local Services</h3><p>Lead capture, reviews, service areas, and conversion-focused pages.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ai">
+      <div class="container">
+        <div class="ai-section">
+          <div>
+            <div class="icon">AI</div>
+            <p class="eyebrow" style="margin-top:18px;">AI Add-On</p>
+            <h2>Your website’s 24/7 customer service worker.</h2>
+            <p class="muted" style="margin-top:16px;">Add this to any package for <strong style="color:white;">+$1,000</strong>.</p>
+          </div>
+          <div class="ai-list">
+            <div>✓ Answers customer questions instantly</div>
+            <div>✓ Captures names, emails, and phone numbers</div>
+            <div>✓ Recommends services or products</div>
+            <div>✓ Helps reduce missed calls</div>
+            <div>✓ Works day and night</div>
+            <div>✓ Turns visitors into real leads</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans">
+      <div class="container">
+        <div class="plans-head">
+          <p class="eyebrow">Simple pricing</p>
+          <h2>Choose your website plan.</h2>
+          <p class="muted" style="margin:16px auto 0;">Every plan can include the AI Add-On for +$1,000 and 24-hour maintenance for $100/month.</p>
+        </div>
+        <div class="plans">
+          <div class="plan-card">
+            <h3>Starter Website</h3>
+            <p class="muted">For small businesses that need a clean online presence.</p>
+            <div class="price">$1,000</div>
+            <ul>
+              <li>Modern 1–5 page website</li>
+              <li>Mobile-friendly design</li>
+              <li>Contact form setup</li>
+              <li>Basic SEO setup</li>
+              <li>Fast launch process</li>
+            </ul>
+            <div class="addon"><strong>AI Add-On:</strong> +$1,000<br><strong>Maintenance:</strong> $100/month</div>
+          </div>
+
+          <div class="plan-card popular">
+            <div class="badge">Popular</div>
+            <h3>Business Website</h3>
+            <p class="muted">For businesses that want stronger branding and lead capture.</p>
+            <div class="price">$1,750</div>
+            <ul>
+              <li>Everything in Starter</li>
+              <li>Custom brand layout</li>
+              <li>Service pages</li>
+              <li>Lead capture sections</li>
+              <li>Google Maps + reviews section</li>
+            </ul>
+            <div class="addon"><strong>AI Add-On:</strong> +$1,000<br><strong>Maintenance:</strong> $100/month</div>
+          </div>
+
+          <div class="plan-card">
+            <h3>E-Commerce Website</h3>
+            <p class="muted">For businesses ready to sell products or services online.</p>
+            <div class="price">$2,500</div>
+            <ul>
+              <li>Online store setup</li>
+              <li>Product or service pages</li>
+              <li>Checkout-ready structure</li>
+              <li>Inventory-friendly layout</li>
+              <li>Conversion-focused design</li>
+            </ul>
+            <div class="addon"><strong>AI Add-On:</strong> +$1,000<br><strong>Maintenance:</strong> $100/month</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="features">
+          <div class="feature-card"><div class="icon">24</div><h3>24-Hour Maintenance</h3><p>Website updates, bug fixes, small changes, backups, and support for $100/month.</p></div>
+          <div class="feature-card"><div class="icon">%</div><h3>Simple Payment</h3><p>50% upfront and 50% after completion so the project stays simple and clear.</p></div>
+          <div class="feature-card"><div class="icon">★</div><h3>Modern Design</h3><p>Sleek, premium, mobile-ready pages that make your business look professional.</p></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="quote">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Lead system + quote request</p>
+            <h2>Get qualified leads directly from your website.</h2>
+          </div>
+          <p>The AI assistant helps visitors choose a service, answer key questions, collect contact details, and push serious customers toward a quote request.</p>
+        </div>
+
+        <div class="quote-ai-grid">
+          <div class="assistant-demo">
+            <div class="icon">AI</div>
+            <h3 style="font-size:1.8rem; margin-top:18px;">AI Assistant Demo</h3>
+            <p class="muted" style="margin-top:10px;">A smart website assistant can qualify leads before you ever pick up the phone.</p>
+            <div class="chat-window">
+              <div class="chat-bubble ai"><strong>Core Site AI:</strong> What type of business do you own, and are you looking for a website, online store, or AI customer service?</div>
+              <div class="chat-bubble customer">I own a barbershop and need a site with booking and customer questions answered.</div>
+              <div class="chat-bubble ai"><strong>Core Site AI:</strong> Great. You may be a fit for the Business Website + AI Add-On. What is your budget and best phone number?</div>
+            </div>
+            <div class="lead-tags">
+              <span>Qualifies budget</span>
+              <span>Captures phone/email</span>
+              <span>Finds service needs</span>
+              <span>Pushes quote requests</span>
+            </div>
+          </div>
+
+          <div class="quote-form">
+            <p class="eyebrow">Free quote</p>
+            <h2 style="font-size:clamp(2rem,3vw,3.1rem);">Request your website quote.</h2>
+            <p class="muted" style="margin-top:12px;">Fill this out and Core Site Agency LLC will review your project details.</p>
+            <form action="mailto:info@coresitellc.com" method="post" enctype="text/plain">
+              <div class="form-row">
+                <label>Full Name
+                  <input type="text" name="Full Name" placeholder="Your name" required>
+                </label>
+                <label>Phone Number
+                  <input type="tel" name="Phone" placeholder="Your phone number" required>
+                </label>
+              </div>
+              <div class="form-row">
+                <label>Email
+                  <input type="email" name="Email" placeholder="you@example.com" required>
+                </label>
+                <label>Business Type
+                  <input type="text" name="Business Type" placeholder="Restaurant, barber, contractor, etc.">
+                </label>
+              </div>
+              <div class="form-row">
+                <label>Package Interest
+                  <select name="Package Interest">
+                    <option>Starter Website - $1,000</option>
+                    <option>Business Website - $1,750</option>
+                    <option>E-Commerce Website - $2,500</option>
+                    <option>Not sure yet</option>
+                  </select>
+                </label>
+                <label>AI Add-On
+                  <select name="AI Add-On">
+                    <option>Yes, add the AI assistant (+$1,000)</option>
+                    <option>Maybe, I want more information</option>
+                    <option>No, website only</option>
+                  </select>
+                </label>
+              </div>
+              <label>Project Details
+                <textarea name="Project Details" placeholder="Tell us what kind of website you need, pages/features, and when you want to launch."></textarea>
+              </label>
+              <button class="btn btn-primary" type="submit">Send Quote Request →</button>
+              <p class="form-note">Note: this starter form opens the visitor’s email app. Once hosted, connect it to Formspree, Netlify Forms, Google Forms, or your CRM for automatic submissions.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <p class="eyebrow" style="color:#475569;">Ready to build?</p>
+            <h2>Let’s build your website today.</h2>
+            <p style="margin-top:18px; color:#475569; max-width:650px;">Call Core Site Agency LLC for a free consultation and learn how an AI-powered website can help your business engage customers around the clock.</p>
+          </div>
+          <div class="contact-card">
+            <p style="color:rgba(255,255,255,.55);">Call us</p>
+            <a href="tel:4703711587">470-371-1587</a>
+            <a class="btn btn-primary" href="tel:4703711587" style="width:100%;">Call Now →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <div class="floating-assistant" aria-label="AI assistant lead qualifier preview">
+      <div class="assistant-header">
+        <div class="icon" style="width:40px;height:40px;border-radius:14px;">AI</div>
+        <div>
+          <strong>Core Site AI Assistant</strong>
+          <span>Lead qualifier preview</span>
+        </div>
+      </div>
+      <div class="assistant-body">
+        <p>Hi, I can help you choose the right website package and see if the AI Add-On fits your business.</p>
+        <div class="assistant-options">
+          <a href="#quote">I need a website quote</a>
+          <a href="#ai">Show me the AI Add-On</a>
+          <a href="tel:4703711587">Call Core Site Agency</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container footer-row">
+        <p>© 2026 Core Site Agency LLC. All rights reserved.</p>
+        <p>CoreSiteLLC.com • Websites • AI Add-On • 24-Hour Maintenance</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
